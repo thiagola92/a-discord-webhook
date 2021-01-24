@@ -1,2 +1,2 @@
-# Another Python Discord Webhook
-Just another python discord webhook package.  
+# Another Discord Webhook
+Just another discord webhook package.  
