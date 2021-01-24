@@ -1,2 +1,2 @@
-# Another Discord Webhook
-Just another discord webhook package.  
+# A Discord Webhook
+Just a discord webhook package.  
