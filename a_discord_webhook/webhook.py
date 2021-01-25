@@ -8,6 +8,8 @@ class Webhook:
         self.identifier = identifier
         self.token = token
         self.content = None
+        self.username = None
+
         self.headers = {
             'Content-Type': 'application/json',
         }
@@ -26,11 +28,19 @@ class Webhook:
 
         return self
 
+    def set_username(self, username):
+        if not isinstance(username, str):
+            raise TypeError("username must be a string")
+        self.username = username
+
+        return self
+
     def execute(self):
         with Session() as session:
             session.headers.update(self.headers)
             session.post(self.url, json={
                 'content': self.content,
+                'username': self.username,
             })
         
         return self
