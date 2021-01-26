@@ -8,5 +8,5 @@ webhook_1.set_content(text)
 
 webhook_2 = Webhook(os.environ['URL']).set_content(text)
 
-assert webhook_1.content == text
-assert webhook_1.content == webhook_2.content
+assert webhook_1.json['content'] == text
+assert webhook_1.json['content'] == webhook_2.json['content']
