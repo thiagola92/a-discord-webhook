@@ -6,7 +6,7 @@ class Webhook:
     def __init__(self, url=None, identifier=None, token=None):
         self._set_credentials(url, identifier, token)
 
-        default_fields = self.get_default_fields()
+        default_fields = self.get()
 
         self.channel_id = default_fields.get('channel_id')
         self.guild_id = default_fields.get('guild_id')
@@ -33,7 +33,7 @@ class Webhook:
         else:
             raise TypeError("missing url or identifier with token")
 
-    def get_default_fields(self):
+    def get(self):
         with Session() as session:
             session.headers.update({'Content-Type': 'application/json'})
             response = session.get(self.url)
@@ -43,21 +43,21 @@ class Webhook:
         return response.json()
 
     def set_content(self, content):
-        if not isinstance(content, (str, None)):
+        if not isinstance(content, str) and avatar_url != None:
             raise TypeError("content must be a string")
         self.fields['content'] = content
 
         return self
 
     def set_username(self, username):
-        if not isinstance(username, (str, None)):
+        if not isinstance(username, str) and avatar_url != None:
             raise TypeError("username must be a string")
         self.fields['username'] = username
 
         return self
 
     def set_avatar_url(self, avatar_url):
-        if not isinstance(avatar_url, (str, None)):
+        if not isinstance(avatar_url, str) and avatar_url != None:
             raise TypeError("avatar_url must be a string")
         self.fields['avatar_url'] = avatar_url
 
@@ -69,6 +69,16 @@ class Webhook:
 
     def set_fields(self, fields: dict):
         self.fields = fields
+        return self
+
+    def modify(self):
+        with Session() as session:
+            session.headers.update({'Content-Type': 'application/json'})
+            session.patch(self.url, json={
+                'name': self.fields['username'],
+                # 'avatar': self.fields['avatar_url']
+            })
+        
         return self
 
     def execute(self):
