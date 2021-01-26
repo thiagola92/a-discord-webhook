@@ -43,6 +43,13 @@ class Webhook:
 
         return self
 
+    def set_avatar_url(self, avatar_url):
+        if not isinstance(avatar_url, (str, None)):
+            raise TypeError("avatar_url must be a string")
+        self.json['avatar_url'] = avatar_url
+
+        return self
+
     def execute(self):
         with Session() as session:
             session.headers.update(self.headers)
