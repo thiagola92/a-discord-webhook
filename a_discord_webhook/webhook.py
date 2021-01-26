@@ -50,6 +50,14 @@ class Webhook:
 
         return self
 
+    def update_fields(self, fields: dict):
+        self.json.update(fields)
+        return self
+
+    def set_fields(self, fields: dict):
+        self.json = fields
+        return self
+
     def execute(self):
         with Session() as session:
             session.headers.update(self.headers)
