@@ -11,6 +11,6 @@ fields = {
 webhook = Webhook(os.environ['URL']).set_username(username).update_fields(fields).execute()
 
 for k, v in fields.items():
-    assert webhook.json[k] == v
+    assert webhook.fields[k] == v
 
-assert webhook.json['username'] == username
+assert webhook.fields['username'] == username

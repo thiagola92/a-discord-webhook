@@ -10,4 +10,4 @@ fields = {
 webhook = Webhook(os.environ['URL']).set_fields(fields).execute()
 
 for k, v in fields.items():
-    assert webhook.json[k] == v
+    assert webhook.fields[k] == v
