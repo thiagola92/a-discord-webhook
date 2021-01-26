@@ -15,6 +15,7 @@ class Webhook:
             'content': None,
             'username': default_fields.get('name'),
             'avatar_url': default_fields.get('avatar'),
+            'tts': None,
             'file': None,
             'embeds': None,
             'payload_json': None,
