@@ -1,10 +1,10 @@
-from random import randrange
+from random import randint
 from secrets import token_urlsafe
 
 from a_discord_webhook.url import mount_url
 from a_discord_webhook.url import extract_id_and_token
 
-numbers = [randint(0,9) for i in range(18)]
+numbers = [str(randint(0,9)) for i in range(18)]
 
 identifier = ''.join(numbers)
 token = token_urlsafe(64)
