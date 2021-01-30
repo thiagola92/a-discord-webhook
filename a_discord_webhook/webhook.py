@@ -34,15 +34,6 @@ class Webhook:
         else:
             raise TypeError("missing url or identifier with token")
 
-    def get(self):
-        with Session() as session:
-            session.headers.update({'Content-Type': 'application/json'})
-            response = session.get(self.url)
-
-            response.raise_for_status()
-        
-        return response.json()
-
     def set_content(self, content):
         if not isinstance(content, str) and avatar_url != None:
             raise TypeError("content must be a string")
@@ -72,13 +63,24 @@ class Webhook:
         self.fields = fields
         return self
 
+    def get(self):
+        with Session() as session:
+            session.headers.update({'Content-Type': 'application/json'})
+            response = session.get(self.url)
+
+            response.raise_for_status()
+        
+        return response.json()
+
     def modify(self):
         with Session() as session:
             session.headers.update({'Content-Type': 'application/json'})
-            session.patch(self.url, json={
+            response = session.patch(self.url, json={
                 'name': self.fields['username'],
                 # 'avatar': self.fields['avatar_url']
             })
+
+            response.raise_for_status()
         
         return self
 
