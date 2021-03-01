@@ -20,5 +20,6 @@ class ExecuteTest(TestCase):
             with mock.patch('a_discord_webhook.webhook.Webhook.execute'):
                 webhook = Webhook(os.environ['URL'])
                 
+        with mock.patch('a_discord_webhook.webhook.Webhook.execute'):
             webhook.set_content('message 1').execute()
             webhook.set_content('message 2').execute()
