@@ -22,7 +22,6 @@ class Webhook:
             'allowed_mentions': None,
         }
 
-
     def _set_credentials(self, url, identifier, token):
         if url != None:
             self.url = url
@@ -87,6 +86,8 @@ class Webhook:
     def execute(self):
         with Session() as session:
             session.headers.update({'Content-Type': 'application/json'})
-            session.post(self.url, json=self.fields)
+            response = session.post(self.url, json=self.fields)
+
+            response.raise_for_status()
         
         return self
